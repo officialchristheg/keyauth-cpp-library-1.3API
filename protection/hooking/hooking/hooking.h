@@ -39,7 +39,7 @@ namespace hooks {
     DWORD  WINAPI HookedQueueUserAPC(PAPCFUNC, HANDLE, ULONG_PTR);
     HANDLE WINAPI HookedOpenProcess(DWORD, BOOL, DWORD);
     BOOL WINAPI HookedGetThreadContext(HANDLE, LPCONTEXT);
-    BOOL WINAPI HookedSeteadContext(HANDLE, CONST CONTEXT*);
+    BOOL WINAPI HookedSetThreadContext(HANDLE, CONST CONTEXT*);
     NTSTATUS NTAPI HookedNtSuspendThread(HANDLE hThread, PULONG PreviousSuspendCount);
     NTSTATUS NTAPI HookedZwSuspendThread(HANDLE hThread, PULONG PreviousSuspendCount);
     NTSTATUS NTAPI HookedNtReadVirtualMemory(HANDLE ProcessHandle, PVOID BaseAddress, PVOID Buffer, SIZE_T Size, PSIZE_T NumberOfBytesRead);
