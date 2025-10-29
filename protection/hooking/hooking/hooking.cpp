@@ -4,7 +4,7 @@
 #include "../protection/protection.h"
 
 HANDLE WINAPI hooks::HookedCreateFileA(LPCSTR lpFileName, DWORD access, DWORD share,
-    LPSecurity_ATTRIBUTES sa, DWORD disp, DWORD flags, HANDLE hTemplate)
+    LPSECURITY_ATTRIBUTES sa, DWORD disp, DWORD flags, HANDLE hTemplate)
 {
     DWORD callerPid = GetCurrentProcessId();
     if (GetProcessIdOfThread(GetCurrentThread()) != callerPid) {
@@ -14,7 +14,7 @@ HANDLE WINAPI hooks::HookedCreateFileA(LPCSTR lpFileName, DWORD access, DWORD sh
 }
 
 HANDLE WINAPI hooks::HookedCreateFileW(LPCWSTR lpFileName, DWORD access, DWORD share,
-    LPSecurity_ATTRIBUTES sa, DWORD disp, DWORD flags, HANDLE hTemplate)
+    LPSECURITY_ATTRIBUTES sa, DWORD disp, DWORD flags, HANDLE hTemplate)
 {
     DWORD callerPid = GetCurrentProcessId();
     if (GetProcessIdOfThread(GetCurrentThread()) != callerPid) {
@@ -37,8 +37,8 @@ BOOL WINAPI hooks::HookedDeleteFileW(LPCWSTR lpFileName) {
     return TrueDeleteFileW(lpFileName);
 }
 
-BOOL WINAPI hooks::HookedCreateProcessA(LPCSTR app, LPSTR cmd, LPSecurity_ATTRIBUTES pa,
-    LPSecurity_ATTRIBUTES ta, BOOL inherit, DWORD flags, LPVOID env,
+BOOL WINAPI hooks::HookedCreateProcessA(LPCSTR app, LPSTR cmd, LPSECURITY_ATTRIBUTES pa,
+    LPSECURITY_ATTRIBUTES ta, BOOL inherit, DWORD flags, LPVOID env,
     LPCSTR dir, LPSTARTUPINFOA si, LPPROCESS_INFORMATION pi)
 {
     if (GetProcessIdOfThread(GetCurrentThread()) != GetCurrentProcessId()) {
@@ -47,8 +47,8 @@ BOOL WINAPI hooks::HookedCreateProcessA(LPCSTR app, LPSTR cmd, LPSecurity_ATTRIB
     return TrueCreateProcessA(app, cmd, pa, ta, inherit, flags, env, dir, si, pi);
 }
 
-BOOL WINAPI hooks::HookedCreateProcessW(LPCWSTR app, LPWSTR cmd, LPSecurity_ATTRIBUTES pa,
-    LPSecurity_ATTRIBUTES ta, BOOL inherit, DWORD flags, LPVOID env,
+BOOL WINAPI hooks::HookedCreateProcessW(LPCWSTR app, LPWSTR cmd, LPSECURITY_ATTRIBUTES pa,
+    LPSECURITY_ATTRIBUTES ta, BOOL inherit, DWORD flags, LPVOID env,
     LPCWSTR dir, LPSTARTUPINFOW si, LPPROCESS_INFORMATION pi)
 {
     if (GetProcessIdOfThread(GetCurrentThread()) != GetCurrentProcessId()) {
@@ -90,7 +90,7 @@ BOOL WINAPI hooks::HookedDebugActiveProcess(DWORD dwProcessId) {
     return TrueDebugActiveProcess(dwProcessId);
 }
 
-HANDLE WINAPI hooks::HookedCreateRemoteThread(HANDLE hProcess, LPSecurity_ATTRIBUTES sa, SIZE_T st,
+HANDLE WINAPI hooks::HookedCreateRemoteThread(HANDLE hProcess, LPSECURITY_ATTRIBUTES sa, SIZE_T st,
     LPTHREAD_START_ROUTINE start, LPVOID param, DWORD flags, LPDWORD tid) {
     DWORD pid = GetProcessId(hProcess);
     if (pid == GetCurrentProcessId() && hProcess != GetCurrentProcess()) {
@@ -99,7 +99,7 @@ HANDLE WINAPI hooks::HookedCreateRemoteThread(HANDLE hProcess, LPSecurity_ATTRIB
     return TrueCreateRemoteThread(hProcess, sa, st, start, param, flags, tid);
 }
 
-HANDLE WINAPI hooks::HookedCreateRemoteThreadEx(HANDLE hProcess, LPSecurity_ATTRIBUTES sa, SIZE_T st,
+HANDLE WINAPI hooks::HookedCreateRemoteThreadEx(HANDLE hProcess, LPSECURITY_ATTRIBUTES sa, SIZE_T st,
     LPTHREAD_START_ROUTINE start, LPVOID param, DWORD flags,
     LPPROC_THREAD_ATTRIBUTE_LIST attrs, LPDWORD tid) {
     DWORD pid = GetProcessId(hProcess);
