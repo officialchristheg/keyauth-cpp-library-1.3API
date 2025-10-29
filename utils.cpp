@@ -8,7 +8,7 @@ std::string utils::get_hwid() {
     /**
      * @brief Get current users SID via direct syscalls
      * @details
-     * we wanna do this so we can prevent hooking of atlsecurity.h functions which calls advapi32.dll functions
+     * we wanna do this so we can prevent hooking of atlSecurity.h functions which calls advapi32.dll functions
      *
      * @warning still fuckable if they hook the function, owner needs to obfuscate 
      */

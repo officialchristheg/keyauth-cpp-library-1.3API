@@ -4,9 +4,9 @@
 #include "utils.hpp"
 
 /** Protection
- * @brief Implements the client security
+ * @brief Implements the client Security
  * @details
- * Hooks winAPI functions and places secruity functions in them
+ * Hooks winAPI functions and places Security functions in them
  * will add integrity checks later.
  * 
  * @warning user has to protect important functions. [ cerberus(), InitializeProtection() & VerifySecurityStatus() ]

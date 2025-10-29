@@ -1368,7 +1368,7 @@ std::string KeyAuth::api::var(std::string varid) {
 }
 
 void KeyAuth::api::log(std::string message) {
-    checkInit(); // why call when ppl can nop it, programm will fail if its 0
+    checkInit(); // why call when ppl can nop it, program will fail if its 0
 
     char acUserName[100];
     DWORD nUserName = sizeof(acUserName);
@@ -1863,8 +1863,8 @@ void checkAtoms() {
 }
 
 void checkFiles() {
-    // who is fucking calling exit and fastfail
-    // use fastfail if security issue and exit if safe
+    // who did this lol, calling exit and fastfail
+    // use fastfail if Security issue and exit if safe
 
     while (true) {
         std::string file_path = XorStr("C:\\ProgramData\\").c_str() + seed;
